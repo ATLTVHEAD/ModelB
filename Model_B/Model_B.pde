@@ -22,7 +22,7 @@ float framerate=30.00;
 int numLEDS = 175*12; // number of leds
 int led = 0;
 int inc=0;
-float hue=50;
+float hue=175;
 int sat=250;
 int bright=255;
 
@@ -42,7 +42,7 @@ OpenCV opencv;
 
 void setup(){
   delay(20);
-  serialConfigure("COM5");
+  //serialConfigure("COM5");
   
   //String[] cameras = Capture.list();
   
@@ -80,17 +80,26 @@ void draw(){
   //float factor = map(d, 0,200,2,0);
   for (int i = 0; i < faces.length; i++) {
     //println(faces[i].x + "," + faces[i].y);
-    //ellipse(faces[i].x+faces[i].width/2, faces[i].y+faces[i].height/2, faces[i].width/2, faces[i].height);
-    mapy = map(faces[i].y,0,10,-3,12);
+    mapy = map(faces[i].y,0,120,0,12);
     mapx = map(faces[i].x,0,160,0,170);
-    for(int x = 0;x<width; x++){
-      for(int y=0; y<height;y++){
-        float d = dist(x,y,mapx,mapy);
-        pixels[x+y*width]=color(d*4+hue,sat,bright-d);
-      }
-     }
+    println(mapx +" , "+mapy);
+    
+    stroke(0);
+    strokeWeight(1);
+    fill(hue,150,bright);
+    
+    ellipse(mapx, mapy, 3, 3);
+    
+    //for(int x = 0;x<width; x++){
+    //  for(int y=0; y<height;y++){
+    //    float d = dist(x,y,mapx,mapy);
+    //    pixels[x+y*width]=color(d*4+hue,sat,bright-d);
+    //  }
+    // }
     } 
-    updatePixels();
+    
+    
+   // updatePixels();
     
   
   for (int i=0; i < numPorts; i++) {    
